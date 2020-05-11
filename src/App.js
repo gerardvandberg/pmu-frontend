@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, useHistory, Link } from 'react-router-dom';
-import { SplashScreen, Map, Header, PumpList } from "./Components/"
+import { SplashScreen, Map, Header, PumpList, PumpForm } from "./Components/"
 import { Fab, Tooltip, makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import ReportForm from 'Components/ReportForm';
@@ -50,6 +50,7 @@ function App() {
             <Route path="/createReport" >
               <ReportForm />
             </Route>
+            <Route path="/pump/:id" render={(props) => <PumpForm {...props} url="http://localhost:1453" />} />
           </Switch>
 
         </Router>
