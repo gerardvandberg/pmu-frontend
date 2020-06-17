@@ -6,6 +6,7 @@ import { SplashScreen, Map, Header, PumpList, PumpForm } from "./Components/"
 import { Fab, Tooltip, makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import ReportForm from 'Components/ReportForm';
+import ReportList from 'Components/ReportList';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import DateFnsUtils from '@date-io/date-fns';
@@ -51,6 +52,7 @@ function App() {
               <ReportForm />
             </Route>
             <Route path="/pump/:id" render={(props) => <PumpForm {...props} url="http://localhost:1453" />} />
+            <Route path="/reports/:id" render={(props) => <ReportList {...props} url="http://localhost:1453" />} />
           </Switch>
 
         </Router>

@@ -9,6 +9,7 @@ import { Grid } from '@material-ui/core';
 
 
 import StatusIcon from './StatusIcon';
+import { Link } from 'react-router-dom';
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
@@ -95,9 +96,11 @@ export default function PumpCard(props) {
                 <Button size="small" color="primary">
                     SHOW ON MAP
         </Button>
-                <Button size="small" color="primary">
-                    VIEW REPORTS
-        </Button>
+                <Link to={`/reports/${pump.id}`} style={{ textDecoration: 'none' }}  >
+                    <Button size="small" color="primary">
+                        VIEW REPORTS
+                 </Button>
+                </Link >
             </CardActions>
         </Card >
     );

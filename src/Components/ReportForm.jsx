@@ -48,7 +48,9 @@ const initialState = {
 export default function ReportForm(props) {
     const history = useHistory();
     const classes = useStyles();
-
+    const id = props.id ?? -1;
+    const filled = props.filled ?? false;
+    const locked = props.locked ?? false;
     useEffect(() => {
         fetchAllPumps();
 
@@ -104,7 +106,7 @@ export default function ReportForm(props) {
             setNotify(true);
         };
     }
-    const handleClose = (event, reason) => {
+    const handleClose = (_, reason) => {
         if (reason === 'clickaway') {
             return;
         }
@@ -137,7 +139,7 @@ export default function ReportForm(props) {
     return (
 
         <div>
-            <Header title="Create a Report" />
+            <Header title="Report" />
             <Card className={classes.root}>
                 <Grid container direction="column" className={classes.root}>
                     <FormControl className={classes.formControl}>
@@ -177,9 +179,9 @@ export default function ReportForm(props) {
                     </Grid>
                     <ReportFormMaterialPicker name="materials" mats={state.materials} onChange={handleMchanges} />
                     <Grid className={classes.root} container justify="flex-end" >
-                        <Button className={classes.root} color="primary" onClick={submit}>
+                        {!locked && <Button className={classes.root} color="primary" onClick={submit}>
                             SUBMIT
-                        </Button>
+                        </Button>}
                     </Grid>
                 </Grid>
             </Card>
