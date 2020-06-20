@@ -53,6 +53,7 @@ function App() {
             </Route>
             <Route path="/pump/:id" render={(props) => <PumpForm {...props} url="http://localhost:1453" />} />
             <Route path="/reports/:id" render={(props) => <ReportList {...props} url="http://localhost:1453" />} />
+            <Route path="/map" render={(props) => <Map {...props} url="http://localhost:1453" />} />
           </Switch>
 
         </Router>
