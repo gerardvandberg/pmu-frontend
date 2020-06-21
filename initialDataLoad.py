@@ -50,3 +50,4 @@ for i in data:
 
 for j in data_t:
     print(requests.post("http://localhost:1453/pump", json=j))
+requests.post("http://localhost:1453/loadDropdown")

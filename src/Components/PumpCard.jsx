@@ -41,8 +41,7 @@ function getDate(date) {
 }
 function getTimeDelta(date) {
     let now = new Date();
-    console.log(`date: ${getDate(date)} now:${getDate(now)}`)
-    console.log((date - now) / oneDay);
+
     return date - now;
 }
 function getStatus(expectedDate) {
@@ -66,7 +65,7 @@ export default function PumpCard(props) {
     const fetchPump = async () => {
         const fetchPump = await fetch(url + path + id);
         const res = await fetchPump.json();
-        console.log(res);
+
         setPump(res);
     }
     const fetchDate = async () => {
@@ -93,14 +92,17 @@ export default function PumpCard(props) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" color="primary">
-                    SHOW ON MAP
-        </Button>
+                <Link to={`/map/${pump.id}`} style={{ textDecoration: 'none' }}  >
+                    <Button size="small" color="primary">
+                        SHOWN ON MAP
+                 </Button>
+                </Link >
                 <Link to={`/reports/${pump.id}`} style={{ textDecoration: 'none' }}  >
                     <Button size="small" color="primary">
                         VIEW REPORTS
                  </Button>
                 </Link >
+
             </CardActions>
         </Card >
     );
