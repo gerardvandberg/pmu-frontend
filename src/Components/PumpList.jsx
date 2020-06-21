@@ -35,8 +35,8 @@ export default function PumpList(props) {
     const fetchPumpIds = async () => {
         const fetchPump = await fetch("http://localhost:1453/getAllIds");
         const res = await fetchPump.json();
-        console.log(res);
-        updatePumpIds(res);
+        const sortedRes = res.map(x => parseInt(x, 10));
+        updatePumpIds(sortedRes.sort((a, b) => a - b));
     }
 
     const handleChange = (event) => {
