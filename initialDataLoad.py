@@ -8,7 +8,7 @@ url = "http://workbench.ddns.net:1453"
 
 
 def cords(d):
-    return d.replace('º', ' ').replace('´', ' ').replace('"', '')
+    return d.replace('º', ' ').replace('´', ' ').replace('"', '').replace("'", " ")
 
 
 with open('in.csv', encoding="utf8") as csvfile:
