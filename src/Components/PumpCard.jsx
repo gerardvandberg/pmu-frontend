@@ -54,6 +54,7 @@ export default function PumpCard(props) {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
     const { id } = props;
+    const onMap = props.onMap ?? false;
     const path = "/pump?pumpId="
     const [pump, setPump] = useState({});
     const [expectedDate, setExpectedDate] = useState(new Date());
@@ -94,11 +95,11 @@ export default function PumpCard(props) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Link to={`/map/${pump.id}`} style={{ textDecoration: 'none' }}  >
+                {(!onMap && (pump.northings && pump.eastings)) && <Link to={`/map/${pump.id}`} style={{ textDecoration: 'none' }}  >
                     <Button size="small" color="primary">
                         SHOWN ON MAP
                  </Button>
-                </Link >
+                </Link >}
                 <Link to={`/reports/${pump.id}`} style={{ textDecoration: 'none' }}  >
                     <Button size="small" color="primary">
                         VIEW REPORTS
