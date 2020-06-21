@@ -5,7 +5,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import { backendUrl } from 'params';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
@@ -29,7 +30,7 @@ export default function ReportCard(props) {
     const classes = useStyles();
     const report = props.Report;
     console.log(props)
-    const dForm = (d) => d.toISOString().replace(/T/, ' ').replace(/\..+/, '');
+    const dForm = (d) => d.toISOString().replace(/T/, ' ').replace(/\..+/, '').split(" ")[0];
     return (
 
         <Card className={classes.root}>
@@ -46,9 +47,11 @@ export default function ReportCard(props) {
 
             </CardContent>
             <CardActions>
-                <Button size="small" color="primary">
-                    MORE
-        </Button>
+                <Link to={`/report/${report.pumpId}/${report.falseId}`} style={{ textDecoration: 'none' }}  >
+                    <Button size="small" color="primary">
+                        MORE
+                 </Button>
+                </Link >
             </CardActions>
         </Card >
     );

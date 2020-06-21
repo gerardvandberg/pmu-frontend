@@ -5,7 +5,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import { ReportCard } from '.';
 import { generatePath } from 'react-router-dom';
 import Header from './Header';
-
+import { backendUrl } from 'params';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -33,7 +33,7 @@ export default function ReportList(props) {
     }, [])
 
     const fetchReports = async () => {
-        const f = await fetch(`${url}/getInterventions?pumpId=${id}`);
+        const f = await fetch(`${backendUrl}/getInterventions?pumpId=${id}`);
         const res = await f.json();
         setReports(res.sort((a, b) => (a.failureDate < b.failureDate) ? 1 : a.failureDate > b.failureDate ? -1 : 0));
     }

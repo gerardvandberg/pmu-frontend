@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import FormLabel from '@material-ui/core/FormLabel';
 import { PumpCard } from '.';
 import { generatePath } from 'react-router-dom';
-
+import { backendUrl } from 'params';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -33,7 +33,7 @@ export default function PumpList(props) {
     }, [])
 
     const fetchPumpIds = async () => {
-        const fetchPump = await fetch("http://localhost:1453/getAllIds");
+        const fetchPump = await fetch(`${backendUrl}/getAllIds`);
         const res = await fetchPump.json();
         const sortedRes = res.map(x => parseInt(x, 10));
         updatePumpIds(sortedRes.sort((a, b) => a - b));

@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ReportFormMaterialPicker(props) {
     const classes = useStyles();
-    const { mats } = props;
+    const { mats, disabled } = props;
 
 
     const changeCallback = (materials) => {
@@ -42,7 +42,7 @@ export default function ReportFormMaterialPicker(props) {
                         <TextField
                             className={classes.root}
                             name="material"
-
+                            disabled={disabled}
                             hintText="Material"
                             floatingLabelText="Material"
                             label="Material"
@@ -52,7 +52,7 @@ export default function ReportFormMaterialPicker(props) {
                         <TextField
                             className={classes.root}
                             name="totalCost"
-
+                            disabled={disabled}
                             hintText="Material total cost"
                             floatingLabelText="Total cost"
                             label="Total cost"
@@ -62,20 +62,21 @@ export default function ReportFormMaterialPicker(props) {
                         <TextField
                             className={classes.root}
                             name="units"
+                            disabled={disabled}
                             hintText="Units"
                             floatingLabelText="Material"
                             label="Units"
                             value={mat.units}
                             onChange={(e) => handlechange(e, i)} />
 
-                        <Button className={classes.root} onClick={(e) => delMat(e, i)}>Delete</Button>
+                        {!disabled && <Button className={classes.root} onClick={(e) => delMat(e, i)}>Delete</Button>}
 
                     </Grid>
                 ))}
 
 
                 <Grid container justify="space-between">
-                    <Button className={classes.root} color="primary" onClick={addMat}>Add Material</Button>
+                    {!disabled && <Button className={classes.root} color="primary" onClick={addMat}>Add Material</Button>}
                 </Grid>
             </Grid>
         </div>

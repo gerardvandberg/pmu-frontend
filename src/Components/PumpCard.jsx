@@ -6,26 +6,25 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
-
+import { backendUrl } from 'params'
 
 import StatusIcon from './StatusIcon';
 import { Link } from 'react-router-dom';
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
-        minWidth: 275,
+        '& > *': {
+            margin: theme.spacing(1),
+            minWwidth: '120',
+        },
     },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: '120',
     },
-    title: {
-        fontSize: 14,
+    selectEmpty: {
+        marginTop: theme.spacing(1),
     },
-    pos: {
-        marginBottom: 12,
-    }
-});
+}));
 const oneDay = 60 * 60 * 24 * 1000;
 
 function addDays(date, days) {
@@ -54,22 +53,24 @@ function getStatus(expectedDate) {
 export default function PumpCard(props) {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
-    const { url, id } = props;
+    const { id } = props;
     const path = "/pump?pumpId="
     const [pump, setPump] = useState({});
-    const [expectedDate, setExpectedDate] = useState(addDays(new Date, 50));
+    const [expectedDate, setExpectedDate] = useState(new Date());
     useEffect(() => {
         fetchPump();
         fetchDate();
     }, [])
     const fetchPump = async () => {
-        const fetchPump = await fetch(url + path + id);
+        const fetchPump = await fetch(backendUrl + path + id);
         const res = await fetchPump.json();
 
         setPump(res);
     }
     const fetchDate = async () => {
-        setExpectedDate(addDays(new Date(), 1 + ((props.id * 9237) % 89)));
+        const f = await fetch(backendUrl + "getPredictedFailureDate?pumpId=" + id);
+        const date = await f.json();
+        setExpectedDate(new Date(date.estimatedDate));
     }
     return (
         <Card className={classes.root}>
@@ -77,8 +78,8 @@ export default function PumpCard(props) {
                 <Grid container direction="row" justify="space-between">
                     <Grid item>
                         <Typography gutterBottom variant="h5" component="h2">
-                            {pump.name} ({pump.id})
-                </Typography>
+                            {pump.name}
+                        </Typography>
                     </Grid>
                     <Grid item>
                         <StatusIcon Tooltip={`Expected failure date: ${getDate(expectedDate)}`} status={getStatus(expectedDate)} />
@@ -88,6 +89,7 @@ export default function PumpCard(props) {
                     Location: {pump.location}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
+                    Expected failure date: {getDate(expectedDate)}
 
                 </Typography>
             </CardContent>

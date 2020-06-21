@@ -29,9 +29,9 @@ function App() {
             </Route >
             <Route path="/list">
               <Header title="Pump List" />
-              <PumpList url="http://localhost:1453" />
-            >
-            <Tooltip title="Create Report">
+              <PumpList />
+
+              <Tooltip title="Create Report">
                 <Link to="/createReport">
                   <Fab color="primary" aria-label="add" style={{
                     margin: 0,
@@ -51,9 +51,11 @@ function App() {
             <Route path="/createReport" >
               <ReportForm />
             </Route>
-            <Route path="/pump/:id" render={(props) => <PumpForm {...props} url="http://localhost:1453" />} />
-            <Route path="/reports/:id" render={(props) => <ReportList {...props} url="http://localhost:1453" />} />
-            <Route path="/map" render={(props) => <Map {...props} url="http://localhost:1453" />} />
+
+            <Route path="/pump/:id" render={(props) => <PumpForm {...props} />} />
+            <Route path="/reports/:id/" render={(props) => <ReportList {...props} />} />
+            <Route path="/report/:id/:time" render={(props) => <ReportForm {...props} />} />
+            <Route path="/map" render={(props) => <Map {...props} />} />
           </Switch>
 
         </Router>

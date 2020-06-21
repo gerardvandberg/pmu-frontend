@@ -3,6 +3,8 @@ import json
 import requests
 import re
 data = {}
+url = "http://workbench.ddns.net:1453"
+# url = "http:/localhost:1453"
 
 
 def cords(d):
@@ -49,5 +51,6 @@ for i in data:
     data_t.append(t)
 
 for j in data_t:
-    print(requests.post("http://localhost:1453/pump", json=j))
-requests.post("http://localhost:1453/loadDropdown")
+    print(requests.post(url+"/pump", json=j))
+
+requests.post(url+"/loadDropdown")
