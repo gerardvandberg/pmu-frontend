@@ -61,6 +61,7 @@ export default function ReportForm(props) {
         }
         fetchAllPumps();
         if (!locked && id) {
+            loadOptions(id);
 
         }
 
