@@ -11,7 +11,7 @@ export default function MapLoader(props) {
     useEffect(() => {
         fetchAllPumps();
 
-    })
+    }, [])
 
     const { match } = props;
 

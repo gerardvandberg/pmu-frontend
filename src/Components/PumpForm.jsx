@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Grid, TextField } from '@material-ui/core';
-
+import { BackendUrl, backendUrl } from 'params';
 
 import StatusIcon from './StatusIcon';
 import { Header } from 'Components';
@@ -54,8 +54,9 @@ function getStatus(expectedDate) {
 
 export default function PumpCard(props) {
     const classes = useStyles();
-    const { url, match } = props;
+    const { match } = props;
     const id = match.params.id;
+    const url = backendUrl;
     const path = "/pump?pumpId="
     const [pump, setPump] = useState({});
     const fetchPump = async () => {
