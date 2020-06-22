@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import FormLabel from '@material-ui/core/FormLabel';
+import AddIcon from '@material-ui/icons/Add';
 import { ReportCard } from '.';
-import { generatePath } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import { backendUrl } from 'params';
+import { Fab, Tooltip } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -44,6 +45,21 @@ export default function ReportList(props) {
     return (
         <React.Fragment>
             <Header title="Reports" />
+            <Tooltip title="Create Report">
+                <Link to={`/createReport/${id}`}>
+                    <Fab color="primary" aria-label="add" style={{
+                        margin: 0,
+                        top: 'auto',
+                        right: 40,
+                        bottom: 20,
+                        left: 'auto',
+                        position: 'fixed',
+                    }}>
+
+                        <AddIcon />
+                    </Fab>
+                </Link>
+            </Tooltip>
             <Grid container className={classes.root} spacing={2} >
                 <Grid item xs={12}>
                     <Grid container justify="flex-start" spacing={spacing} direction="column">

@@ -25,7 +25,7 @@ function App() {
         <Router>
           <Switch>
             <Route path="/" exact>
-              <SplashScreen landingPath="/list" />
+              <SplashScreen landingPath="/map" />
             </Route >
             <Route path="/list">
               <Header title="Pump List" />
@@ -48,10 +48,7 @@ function App() {
               </Tooltip>
 
             </Route>
-            <Route path="/createReport" >
-              <ReportForm />
-            </Route>
-
+            <Route path="/createReport/:id" render={(props) => <ReportForm {...props} />} />
             <Route path="/pump/:id" render={(props) => <PumpForm {...props} />} />
             <Route path="/reports/:id/" render={(props) => <ReportList {...props} />} />
             <Route path="/report/:id/:time" render={(props) => <ReportForm {...props} />} />

@@ -98,6 +98,7 @@ export default function PumpCard(props) {
                 {(!onMap && (pump.northings && pump.eastings)) && <Link to={`/map/${pump.id}`} style={{ textDecoration: 'none' }}  >
                     <Button size="small" color="primary">
                         SHOWN ON MAP
+                        
                  </Button>
                 </Link >}
                 <Link to={`/reports/${pump.id}`} style={{ textDecoration: 'none' }}  >
