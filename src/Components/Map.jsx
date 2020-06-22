@@ -7,6 +7,24 @@ import Header from './Header';
 import PumpCard from './PumpCard';
 
 const cord = d => d[0] + d[1] / 60 + (d[2] ?? 0) / 3600;
+const blueIcon = new Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+const goldIcon = new Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
+
+
 export default function MapLoader(props) {
     useEffect(() => {
         fetchAllPumps();
@@ -32,7 +50,7 @@ export default function MapLoader(props) {
 
         if (id) {
             const p = pFilter.filter(x => x.id == id)[0];
-            setCenter([cord(p.northings), cord(p.eastings)]);
+            setCenter([cord(p.northings.split(" ").map(x => parseInt(x, 10))), cord(p.eastings.split(" ").map(x => parseInt(x, 10)))]);
         }
         else {
 
@@ -49,18 +67,17 @@ export default function MapLoader(props) {
 
         setAllPumps(pFilter)
     }
-
     return (
         <React.Fragment>
             <Header title="Map" />
-            <Map center={center} zoom={(id) ? 50 : 10}>
+            <Map center={center} zoom={(id) ? 10 : 10}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 />
                 {pumps.map((pump, index) => (
 
-                    <Marker key={index}
+                    <Marker key={index} icon={(pump.id == id) ? goldIcon : blueIcon}
                         position={
                             [
                                 cord(pump.northings.split(" ").map(x => parseInt(x, 10))),

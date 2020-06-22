@@ -125,9 +125,9 @@ export default function ReportForm(props) {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(state)
+                body: JSON.stringify({ ...state, interventionDate: state.failureDate })
             };
-            console.log(state)
+
             const res = await fetch(`${backendUrl}/postIntervention`, requestOptions);
             debugger;
             console.log(res);

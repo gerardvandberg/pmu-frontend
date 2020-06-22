@@ -52,7 +52,8 @@ function App() {
             <Route path="/pump/:id" render={(props) => <PumpForm {...props} />} />
             <Route path="/reports/:id/" render={(props) => <ReportList {...props} />} />
             <Route path="/report/:id/:time" render={(props) => <ReportForm {...props} />} />
-            <Route path="/map" render={(props) => <Map {...props} />} />
+            <Route exact path="/map/" render={(props) => <Map {...props} />} />
+            <Route path="/map/:id" render={(props) => <Map {...props} />} />
           </Switch>
 
         </Router>
